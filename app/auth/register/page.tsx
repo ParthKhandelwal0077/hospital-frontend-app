@@ -40,12 +40,13 @@ export default function RegisterPage() {
       const { confirmPassword, ...userData } = data;
       const registerData = {
         ...userData,
-        password_confirm: data.confirmPassword,
+        password2: confirmPassword,
       };
       await auth.register(registerData);
       router.push('/dashboard');
-    } catch (err: any) {
-      const errorData = err.response?.data;
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: Record<string, unknown> } };
+      const errorData = error.response?.data;
       if (errorData) {
         const errorMessages = Object.values(errorData).flat().join(' ');
         setError(errorMessages || 'Registration failed. Please try again.');

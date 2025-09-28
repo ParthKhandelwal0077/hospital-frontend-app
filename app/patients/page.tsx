@@ -6,7 +6,6 @@ import AuthGuard from '@/components/auth/AuthGuard';
 import PatientList from '@/components/patients/PatientList';
 import PatientForm from '@/components/patients/PatientForm';
 import Modal from '@/components/ui/Modal';
-import Card from '@/components/ui/Card';
 import { Patient, PatientFormData } from '@/lib/types';
 import { patientsAPI } from '@/lib/api';
 
@@ -82,8 +81,9 @@ export default function PatientsPage() {
         toast.success(response.data.message || 'Patient updated successfully');
       }
       setIsModalOpen(false);
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.detail || 'Operation failed';
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { detail?: string } } };
+      const errorMessage = err.response?.data?.detail || 'Operation failed';
       toast.error(errorMessage);
       console.error('Form submission error:', error);
     } finally {

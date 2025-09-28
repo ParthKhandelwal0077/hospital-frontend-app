@@ -68,7 +68,7 @@ export default function MappingsPage() {
   };
 
   const handleDelete = async (mapping: PatientDoctorMapping) => {
-    if (!confirm(`Are you sure you want to delete the mapping between ${mapping.patient.full_name} and ${mapping.doctor.full_name}?`)) {
+    if (!confirm(`Are you sure you want to delete the mapping between ${mapping.patient_name} and ${mapping.doctor_name}?`)) {
       return;
     }
 
@@ -97,8 +97,9 @@ export default function MappingsPage() {
         toast.success(response.data.message || 'Mapping updated successfully');
       }
       setIsModalOpen(false);
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.detail || 'Operation failed';
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { detail?: string } } };
+      const errorMessage = err.response?.data?.detail || 'Operation failed';
       toast.error(errorMessage);
       console.error('Form submission error:', error);
     } finally {

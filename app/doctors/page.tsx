@@ -81,8 +81,9 @@ export default function DoctorsPage() {
         toast.success(response.data.message || 'Doctor updated successfully');
       }
       setIsModalOpen(false);
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.detail || 'Operation failed';
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { detail?: string } } };
+      const errorMessage = err.response?.data?.detail || 'Operation failed';
       toast.error(errorMessage);
       console.error('Form submission error:', error);
     } finally {
@@ -228,7 +229,10 @@ export default function DoctorsPage() {
               </div>
             ) : (
               <DoctorForm
-                initialData={selectedDoctor || undefined}
+                initialData={selectedDoctor ? {
+                  ...selectedDoctor,
+                  consultation_fee: parseFloat(selectedDoctor.consultation_fee)
+                } : undefined}
                 onSubmit={handleFormSubmit}
                 onCancel={handleCloseModal}
                 isLoading={isFormLoading}

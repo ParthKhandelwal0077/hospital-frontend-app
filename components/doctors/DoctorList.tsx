@@ -109,9 +109,13 @@ const DoctorList: React.FC<DoctorListProps> = ({
                         </h3>
                         <div className="flex items-center">
                           {doctor.is_available ? (
-                            <CheckCircle className="h-5 w-5 text-green-500" title="Available" />
+                            <div title="Available">
+                              <CheckCircle className="h-5 w-5 text-green-500" />
+                            </div>
                           ) : (
-                            <XCircle className="h-5 w-5 text-red-500" title="Not Available" />
+                            <div title="Not Available">
+                              <XCircle className="h-5 w-5 text-red-500" />
+                            </div>
                           )}
                         </div>
                       </div>

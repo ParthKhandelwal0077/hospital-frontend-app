@@ -64,9 +64,10 @@ export default function DashboardPage() {
         setRecentPatients(patients.slice(0, 5));
         setRecentDoctors(doctors.slice(0, 5));
         setRecentMappings(mappings.slice(0, 5));
-      } catch (error) {
+      } catch (error: unknown) {
         console.error('Dashboard - Failed to fetch dashboard data:', error);
-        console.error('Dashboard - Error details:', error.response?.data);
+        const err = error as { response?: { data?: unknown } };
+        console.error('Dashboard - Error details:', err.response?.data);
       } finally {
         setIsLoading(false);
       }
