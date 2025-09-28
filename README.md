@@ -1,36 +1,170 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Healthcare Management System - Frontend
 
-## Getting Started
+A comprehensive healthcare management system frontend built with Next.js and TypeScript, designed to work with a Django backend.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Authentication System**: JWT-based authentication with login/register functionality
+- **Patient Management**: Complete CRUD operations for patient records
+- **Doctor Management**: Comprehensive doctor profiles with specializations
+- **Patient-Doctor Mapping**: Efficient assignment and management of patient-doctor relationships
+- **Dashboard**: Overview of system statistics and recent activities
+- **Responsive Design**: Modern, mobile-friendly interface
+
+## 🛠️ Technology Stack
+
+### Frontend
+- **Next.js 15**: React framework for production
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+- **React Hook Form**: Performant forms with easy validation
+- **Axios**: Promise-based HTTP client
+- **Lucide React**: Beautiful & consistent icons
+- **React Hot Toast**: Elegant toast notifications
+
+### Backend Integration
+- **Django 4.2.7**: Robust web framework
+- **Django REST Framework 3.14.0**: API development
+- **JWT Authentication**: Secure token-based authentication
+- **SQLite/PostgreSQL**: Reliable data storage
+
+## 📋 Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Running Django backend at `http://127.0.0.1:8000`
+
+## 🔧 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd healthcare-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+## 🏗️ Project Structure
+
+```
+healthcare-frontend/
+├── app/                      # Next.js app directory
+│   ├── auth/                # Authentication pages
+│   ├── dashboard/           # Dashboard page
+│   ├── patients/            # Patient management
+│   ├── doctors/             # Doctor management
+│   ├── mappings/            # Patient-doctor mappings
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Home page
+├── components/              # Reusable components
+│   ├── auth/                # Authentication components
+│   ├── doctors/             # Doctor-related components
+│   ├── layout/              # Layout components
+│   ├── mappings/            # Mapping components
+│   ├── patients/            # Patient-related components
+│   └── ui/                  # UI components
+├── lib/                     # Utility libraries
+│   ├── api.ts               # API client configuration
+│   ├── auth.ts              # Authentication utilities
+│   └── types.ts             # TypeScript type definitions
+└── public/                  # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔑 API Integration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The frontend integrates with the following backend endpoints:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Authentication APIs
+- `POST /api/auth/api_register/` - User registration
+- `POST /api/auth/api_login/` - User login
+- `GET /api/auth/api_profile/` - Get user profile
+- `POST /api/auth/token/refresh/` - Refresh JWT token
 
-## Learn More
+### Patient Management APIs
+- `GET /api/patients/api/` - List patients
+- `POST /api/patients/api/` - Create patient
+- `GET /api/patients/api/<id>/` - Get patient details
+- `PUT /api/patients/api/<id>/` - Update patient
+- `DELETE /api/patients/api/<id>/` - Delete patient
 
-To learn more about Next.js, take a look at the following resources:
+### Doctor Management APIs
+- `GET /api/doctors/api/` - List doctors
+- `POST /api/doctors/api/create/` - Create doctor
+- `GET /api/doctors/api/<id>/` - Get doctor details
+- `PATCH /api/doctors/api/<id>/update/` - Update doctor
+- `DELETE /api/doctors/api/<id>/delete/` - Delete doctor
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Patient-Doctor Mapping APIs
+- `GET /api/mappings/` - List mappings
+- `POST /api/mappings/` - Create mapping
+- `GET /api/mappings/patient/<patient_id>/` - Get patient's doctors
+- `PATCH /api/mappings/<id>/update/` - Update mapping
+- `DELETE /api/mappings/<id>/` - Delete mapping
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎨 UI Components
 
-## Deploy on Vercel
+The application includes a comprehensive set of reusable UI components:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Button**: Customizable button with variants and loading states
+- **Input**: Form input with label and error handling
+- **Select**: Dropdown select component
+- **Card**: Container component for content sections
+- **Modal**: Overlay modal for forms and details
+- **AuthGuard**: Protected route wrapper
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔒 Authentication Flow
+
+1. **Registration**: Users can create accounts with email verification
+2. **Login**: JWT tokens are stored in localStorage
+3. **Auto-refresh**: Tokens are automatically refreshed when expired
+4. **Protected Routes**: AuthGuard component protects authenticated pages
+5. **Logout**: Tokens are cleared and user is redirected
+
+## 📱 Responsive Design
+
+The application is fully responsive and works on:
+- Desktop computers
+- Tablets
+- Mobile phones
+
+## 🚦 Getting Started
+
+1. **Start the Django backend** (ensure it's running on port 8000)
+2. **Install and start the frontend** (follows installation steps above)
+3. **Create an account** or login with existing credentials
+4. **Explore the features**:
+   - Add patients and doctors
+   - Create patient-doctor mappings
+   - View dashboard statistics
+   - Manage all records with full CRUD operations
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🐛 Issues & Support
+
+For issues and support, please create an issue in the repository or contact the development team.
+
+---
+
+**Note**: Make sure your Django backend is running and accessible at `http://127.0.0.1:8000` before starting the frontend application.
